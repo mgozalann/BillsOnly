@@ -13,18 +13,16 @@ public class PlayerController : MonoBehaviour
     private Vector3 _offSet;
     private Transform _selected;
     private Transform _pickedColumn;
-    [SerializeField] private LayerMask _dragMask;
-    [SerializeField] private LayerMask _columnMask;
+    [SerializeField] LayerMask _dragMask;
+    [SerializeField] LayerMask _columnMask;
 
-    private Vector3 v3;
-
-    ColumnController columnController;
+    ColumnController _columnController;
 
     RaycastHit hit;
 
     private void Update()
     {
-       
+        Vector3 v3;
 
         if (Input.touchCount != 1)
         {
@@ -40,10 +38,12 @@ public class PlayerController : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(pos);
             if (Physics.Raycast(ray, out hit, _dragMask))
             {
+                if (!hit.collider.CompareTag("Drag")) return;
 
+                Debug.Log(hit.collider.name);
                 _selected = hit.transform;
-                //_dist = hit.point.z - Camera.main.transform.position.z;
 
+                _dist = hit.point.z - Camera.main.transform.position.z;
                 v3 = new Vector3(pos.x, pos.y, _dist);
                 v3 = Camera.main.ScreenToWorldPoint(v3);
 
@@ -51,47 +51,80 @@ public class PlayerController : MonoBehaviour
 
                 _dragging = true;
 
+
             }
+            else return;
         }
 
         if (_dragging && touch.phase == TouchPhase.Moved)
         {
-            if(selectedObjects.Count != 0)
+            if (selectedObjects.Count != 0)
             {
+
                 v3 = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.WorldToScreenPoint(selectedObjects[0].position).z);
                 v3 = Camera.main.ScreenToWorldPoint(v3);
 
                 selectedObjects[0].position = new Vector3(v3.x, .3f, v3.z);
 
-                DragJeton();            
+                DragJeton();
             }
-           
+
         }
 
         if (_dragging && (touch.phase == TouchPhase.Ended || touch.phase == TouchPhase.Canceled))
         {
-            _selected.position = new Vector3(_selected.position.x, .15f, _selected.position.z);
+            if (selectedObjects.Count == 0) return;
 
-            LeaveJeton();
+            if (Physics.Raycast(selectedObjects[0].position,Vector3.down,100f,_columnMask))
+            {
+                Debug.DrawRay(selectedObjects[0].position, Vector3.down,Color.green);
+                if (hit.collider.GetComponent<ColumnController>() != null)
+                {
+
+                    ColumnController columnController = hit.collider.GetComponent<ColumnController>();
+
+                    foreach (var obj in selectedObjects)
+                    {
+
+                        columnController.objects.Add(obj);
+                        _selected.position = new Vector3(_selected.position.x, .15f, _selected.position.z);
+
+                    }
+                    columnController.OrganizeList();
+                }
+            }
+            else
+            {
+                if (_selected != null)
+                {
+
+                    ColumnController columnController = _selected.GetComponent<ObjectController>().WhichColumn.GetComponent<ColumnController>();
+                    for (int i = 0; i <= selectedObjects.Count - 1; i++)
+                    {
+                        columnController.objects.Add(selectedObjects[i]);
+                    }
+                    columnController.OrganizeList();
+
+                }
+            }
+
             selectedObjects.Clear();
-
+            _selected = null;
             _dragging = false;
 
         }
     }
-
-    //genelden özele
-    //ya da özelden genele
-    //ray attýðýnda getcomponent kullanabilir.
     private void Jeton(GameObject selected)
     {
         if (selected.GetComponent<ObjectController>() != null)
         {
             ObjectController objectController = selected.GetComponent<ObjectController>();
+            List<Transform> columnObj = objectController.WhichColumn.GetComponent<ColumnController>().objects;
 
-            for (int i = objectController.Row; i <= objectController.WhichColumn.GetComponent<ColumnController>().objects.Count - 1; i++)
+            for (int i = objectController.Row; i <= columnObj.Count - 1; i++)
             {
-                selectedObjects.Add(objectController.WhichColumn.GetComponent<ColumnController>().objects[i]);
+                selectedObjects.Add(columnObj[i]);
+                columnObj.Remove(columnObj[i]);
             }
         }
 
@@ -99,7 +132,6 @@ public class PlayerController : MonoBehaviour
 
     private void DragJeton()
     {
-       
         float offSetz = -0.5f;
         float offSety = 0.1f;
 
@@ -109,33 +141,6 @@ public class PlayerController : MonoBehaviour
                 selectedObjects[i].position.x,
                 selectedObjects[i].position.y + offSety,
                 selectedObjects[i].position.z + offSetz);
-        }
-
-        
-    }
-
-    private void LeaveJeton()
-    {
-        Touch touch = Input.touches[0];
-        Vector3 pos = touch.position;
-        Ray ray = Camera.main.ScreenPointToRay(pos);
-        if (Physics.Raycast(ray, out hit, _columnMask))
-        {
-            Debug.Log("maske çarptý");
-            if (hit.collider.GetComponent<ColumnController>() != null)
-            {
-                Debug.Log("içine girdi");
-
-                ColumnController columnController = hit.collider.GetComponent<ColumnController>();
-                Debug.Log(columnController.gameObject.name);
-                //foreach (var obj in selectedObjects)
-                //{
-                //    columnController.objects.Add(obj);
-                //    columnController.OrganizeList();
-                //}
-            }
-
-
         }
     }
 }

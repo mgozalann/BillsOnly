@@ -8,10 +8,6 @@ public class ColumnController : MonoBehaviour
 
     [SerializeField] GameObject[] cubePrefabs;
 
-    private void Awake()
-    {
-
-    }
     void Start()
     {
         SpawnObjects();
@@ -39,7 +35,7 @@ public class ColumnController : MonoBehaviour
 
 
             offSetz -= 0.5f;
-            offSety += +0.1f;
+            offSety += +0.25f;
         }
 
         OrganizeList();
@@ -59,7 +55,7 @@ public class ColumnController : MonoBehaviour
             objectController.Row = i;
 
             offSetz -= 0.5f;
-            offSety += +0.1f;
+            offSety += +0.25f;
             i++;
         }
 
