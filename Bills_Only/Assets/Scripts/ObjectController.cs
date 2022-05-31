@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class ObjectController : MonoBehaviour
 {
-    private PlayerController playerController;
+    [SerializeField] ObjectSO _objectSO;
 
     [SerializeField] private Transform _whichColumn;
     [SerializeField] private int _row;
 
+    public ObjectSO ObjectSO => _objectSO;
     //injection araþtýr
     //buna gerek yok , indexof
     public int Row
@@ -33,16 +34,4 @@ public class ObjectController : MonoBehaviour
             _whichColumn = value;
         }
     }
-    private void Awake()
-    {
-        playerController = FindObjectOfType<PlayerController>();
-    }
-
-    private void Update()
-    {
-
-    }
-
-
-
 }

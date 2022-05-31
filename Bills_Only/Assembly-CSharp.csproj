@@ -58,7 +58,12 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\ObjectController.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
+    <Compile Include="Assets\Scripts\ObjectSO.cs" />
     <Compile Include="Assets\Scripts\ColumnController.cs" />
+    <Compile Include="Assets\Scripts\SpawnManager.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Low Poly ATM\Materials\vertexcolorsstandard.shader" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

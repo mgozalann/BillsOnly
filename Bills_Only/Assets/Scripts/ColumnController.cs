@@ -6,40 +6,7 @@ public class ColumnController : MonoBehaviour
 {
     public List<Transform> objects = new List<Transform>();
 
-    [SerializeField] GameObject[] cubePrefabs;
-
-    void Start()
-    {
-        SpawnObjects();
-    }
-
-    private void Update()
-    {
-        //OrganizeList();
-    }
-    private void SpawnObjects()
-    {
-        float offSetz = 0;
-        float offSety = 0;
-
-        for (int i = 0; i < cubePrefabs.Length; i++)
-        {
-            GameObject newObj = Instantiate(
-                    cubePrefabs[i],
-                    new Vector3(transform.position.x, transform.position.y + offSety, transform.position.z + offSetz),
-                    Quaternion.identity);
-
-            newObj.transform.parent = transform;
-
-            objects.Add(newObj.transform);
-
-
-            offSetz -= 0.5f;
-            offSety += +0.25f;
-        }
-
-        OrganizeList();
-    }
+    [SerializeField] Transform spawnManager;
     public void OrganizeList()
     {
         float offSetz = 0;
@@ -58,13 +25,24 @@ public class ColumnController : MonoBehaviour
             offSety += +0.25f;
             i++;
         }
-
+        StartCoroutine(CheckList());
     }
     IEnumerator CheckList()
     {
-        //eklenecek
-        //indexe insert
-        //oncraft eventi
+        yield return new WaitForSeconds(2f);
+        for (int i = objects.Count - 1; i >= 1; i--)
+        {
+            if (objects[i].GetComponent<ObjectController>().ObjectSO.Value == objects[i - 1].GetComponent<ObjectController>().ObjectSO.Value)
+            {
+                objects[i].gameObject.SetActive(false);
+                objects[i-1].gameObject.SetActive(false);
+                objects.Remove(objects[i]);
+                var newGameObj = Instantiate(objects[i - 1].GetComponent<ObjectController>().ObjectSO.NextValueGameObject, objects[i - 1].position, objects[i - 1].rotation);
+                newGameObj.transform.parent = spawnManager;
+                objects[i - 1] = newGameObj.transform;
+                OrganizeList();
+            }
+        }
         yield return null;
     }
 }
