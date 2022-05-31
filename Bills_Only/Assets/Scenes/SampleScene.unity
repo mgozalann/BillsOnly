@@ -151,7 +151,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 154854126}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &127392227
 GameObject:
@@ -186,10 +186,7 @@ MonoBehaviour:
   objects: []
   _spawnManager: {fileID: 1271979072}
   _playerController: {fileID: 1649745768}
-  target:
-  - {fileID: 109134467}
-  - {fileID: 1857029104}
-  - {fileID: 1872347549}
+  _atmController: {fileID: 1674742503}
   duration: 0.4
 --- !u!65 &127392229
 BoxCollider:
@@ -614,6 +611,27 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1674742502 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2454843364150181436, guid: dc90d554ef4c11844b2ac15acc133098, type: 3}
+  m_PrefabInstance: {fileID: 2454843364506805628}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1674742503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1674742502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 333c258e49e976043b2acf2ab68a7b00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target:
+  - {fileID: 109134467}
+  - {fileID: 1857029104}
+  - {fileID: 1872347549}
 --- !u!1 &1857029103
 GameObject:
   m_ObjectHideFlags: 0
@@ -638,11 +656,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1857029103}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.018, z: 0.452}
+  m_LocalPosition: {x: 0, y: -0.0146, z: 0.4544}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 154854126}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1872347548
 GameObject:
@@ -668,11 +686,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1872347548}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.033, z: 0.502}
+  m_LocalPosition: {x: 0, y: -0.028, z: 0.5055}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 154854126}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2108250416
 GameObject:
@@ -734,10 +752,7 @@ MonoBehaviour:
   objects: []
   _spawnManager: {fileID: 1271979072}
   _playerController: {fileID: 1649745768}
-  target:
-  - {fileID: 109134467}
-  - {fileID: 1857029104}
-  - {fileID: 1872347549}
+  _atmController: {fileID: 1674742503}
   duration: 0.4
 --- !u!1 &2117076434
 GameObject:
@@ -772,10 +787,7 @@ MonoBehaviour:
   objects: []
   _spawnManager: {fileID: 1271979072}
   _playerController: {fileID: 1649745768}
-  target:
-  - {fileID: 109134467}
-  - {fileID: 1857029104}
-  - {fileID: 1872347549}
+  _atmController: {fileID: 1674742503}
   duration: 0.4
 --- !u!65 &2117076436
 BoxCollider:
@@ -813,7 +825,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2454843364150181436, guid: dc90d554ef4c11844b2ac15acc133098, type: 3}
       propertyPath: m_Name
-      value: ATM1
+      value: ATM
       objectReference: {fileID: 0}
     - target: {fileID: 2454843364150181439, guid: dc90d554ef4c11844b2ac15acc133098, type: 3}
       propertyPath: m_RootOrder
