@@ -9,10 +9,24 @@ public class PlayerController : MonoBehaviour
     [SerializeField] List<Transform> selectedObjects = new List<Transform>();
 
     private float _dist;
-    private bool _dragging = false;
+
+    private bool _dragging = true;
+
     private Transform _selected;
 
     [SerializeField] private LayerMask _columnMask, _dragMask;
+
+    public bool Dragging
+    {
+        get
+        {
+            return _dragging;
+        }
+        set
+        {
+            _dragging = value;
+        }
+    }
 
     RaycastHit hit;
 
@@ -31,6 +45,7 @@ public class PlayerController : MonoBehaviour
 
         if (touch.phase == TouchPhase.Began)
         {
+
             Ray ray = Camera.main.ScreenPointToRay(pos);
             if (Physics.Raycast(ray, out hit, _dragMask))
             {
@@ -56,7 +71,6 @@ public class PlayerController : MonoBehaviour
         {
             if (selectedObjects.Count != 0)
             {
-
                 v3 = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.WorldToScreenPoint(selectedObjects[0].position).z);
                 v3 = Camera.main.ScreenToWorldPoint(v3);
 

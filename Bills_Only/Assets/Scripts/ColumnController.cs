@@ -1,14 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class ColumnController : MonoBehaviour
 {
     public List<Transform> objects = new List<Transform>();
 
-    [SerializeField] Transform spawnManager;
+    [SerializeField] Transform _spawnManager;
+    [SerializeField] PlayerController _playerController;
+    [SerializeField] Transform[] target;
+
+    [SerializeField] float duration;
+
+    int j = 0;
     public void OrganizeList()
     {
+        if(objects.Count == 0) return;
+
+        _playerController.Dragging = false;
+
         float offSetz = 0;
         float offSety = 0;
         int i = 0;
@@ -23,26 +34,55 @@ public class ColumnController : MonoBehaviour
 
             offSetz -= 0.5f;
             offSety += +0.25f;
+
             i++;
+
         }
-        StartCoroutine(CheckList());
+        StartCoroutine(MakeWave());
+
     }
     IEnumerator CheckList()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
         for (int i = objects.Count - 1; i >= 1; i--)
         {
             if (objects[i].GetComponent<ObjectController>().ObjectSO.Value == objects[i - 1].GetComponent<ObjectController>().ObjectSO.Value)
             {
+                objects[i - 1].gameObject.SetActive(false);
                 objects[i].gameObject.SetActive(false);
-                objects[i-1].gameObject.SetActive(false);
                 objects.Remove(objects[i]);
-                var newGameObj = Instantiate(objects[i - 1].GetComponent<ObjectController>().ObjectSO.NextValueGameObject, objects[i - 1].position, objects[i - 1].rotation);
-                newGameObj.transform.parent = spawnManager;
-                objects[i - 1] = newGameObj.transform;
+
+                var nextGO = objects[i - 1].GetComponent<ObjectController>().ObjectSO.NextValueGameObject;
+                
+                //çýkardýðý i ile ayný olduðu için tekrar yapýyor.
+
+                nextGO = Instantiate(nextGO, objects[i - 1].position, nextGO.transform.rotation);
+                nextGO.transform.parent = _spawnManager;
+
+                if (nextGO.GetComponent<ObjectController>() != null)
+                {
+                    objects[i - 1] = nextGO.transform;
+                }
+                else
+                {
+                    objects.Remove(objects[i-1]);
+                    nextGO.transform.DOMove(target[j].position, 2f, false);
+                    j++;
+                }
+
                 OrganizeList();
             }
         }
-        yield return null;
+        _playerController.Dragging = true;
+    }
+
+    IEnumerator MakeWave()
+    {
+        for (int i = 0; i <= objects.Count - 1; i++)
+        {
+            objects[i].DOPunchPosition(Vector3.up/2, duration, 1, 1f, false);
+            yield return new WaitForSeconds(.05f);
+        }
+        StartCoroutine(CheckList());
     }
 }
