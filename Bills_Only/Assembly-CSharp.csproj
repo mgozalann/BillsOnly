@@ -60,8 +60,8 @@
     <Compile Include="Assets\Scripts\ObjectController.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\ObjectSO.cs" />
-    <Compile Include="Assets\Scripts\ColumnController.cs" />
     <Compile Include="Assets\Scripts\AtmController.cs" />
+    <Compile Include="Assets\Scripts\ColumnController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Low Poly ATM\Materials\vertexcolorsstandard.shader" />
@@ -637,9 +637,17 @@
       <Project>{2A69C938-2441-C79B-974F-C8BC6137E14F}</Project>
       <Name>Assembly-CSharp-firstpass</Name>
     </ProjectReference>
+    <ProjectReference Include="Unity.Recorder.Editor.csproj">
+      <Project>{4863B1B2-7303-29C3-BDF8-7DD93C2C65FB}</Project>
+      <Name>Unity.Recorder.Editor</Name>
+    </ProjectReference>
     <ProjectReference Include="Unity.VSCode.Editor.csproj">
       <Project>{FE583862-8156-4ED1-A6A6-B7ECB00740D0}</Project>
       <Name>Unity.VSCode.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Recorder.Base.csproj">
+      <Project>{F875B064-667F-3636-98CF-4E8A98CEF518}</Project>
+      <Name>Unity.Recorder.Base</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.TextMeshPro.Editor.csproj">
       <Project>{D5024C89-6C27-FC11-CF07-577545723A15}</Project>
@@ -681,17 +689,9 @@
       <Project>{A47E7D29-6858-8BA5-D95C-F29BE07AD953}</Project>
       <Name>UnityEngine.UI</Name>
     </ProjectReference>
-    <ProjectReference Include="Unity.Recorder.Editor.csproj">
-      <Project>{4863B1B2-7303-29C3-BDF8-7DD93C2C65FB}</Project>
-      <Name>Unity.Recorder.Editor</Name>
-    </ProjectReference>
     <ProjectReference Include="Unity.Recorder.csproj">
       <Project>{72ABDF42-1CC6-A043-A76E-E9852D4DC883}</Project>
       <Name>Unity.Recorder</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.Recorder.Base.csproj">
-      <Project>{F875B064-667F-3636-98CF-4E8A98CEF518}</Project>
-      <Name>Unity.Recorder.Base</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

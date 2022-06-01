@@ -7,6 +7,8 @@ public class ColumnController : MonoBehaviour
 {
     public List<Transform> objects = new List<Transform>();
 
+    private bool _crRunning = false;
+
     [SerializeField] Transform _spawnManager;
     [SerializeField] PlayerController _playerController;
     [SerializeField] AtmController _atmController;
@@ -31,15 +33,40 @@ public class ColumnController : MonoBehaviour
             var objectController = obj.GetComponent<ObjectController>();
 
             obj.position = new Vector3(transform.position.x, transform.position.y + offSety, transform.position.z + offSetz);
+
             objectController.WhichColumn = this.transform;
             objectController.Row = i;
 
             offSetz -= 0.5f;
             offSety += +0.25f;
             i++;
+
         }
+
+        MakeWaveAsync();
+    }
+
+    private void CheckListAysnc()
+    {
+        StartCoroutine(CheckList());
+    }
+    private void MakeWaveAsync()
+    {
         StartCoroutine(MakeWave());
     }
+
+    IEnumerator MakeWave()
+    {
+
+        for (int i = 0; i <= objects.Count - 1; i++)
+        {
+            objects[i].DOPunchPosition(Vector3.up / 2, duration, 1, 1f, false);
+            yield return new WaitForSeconds(.05f);
+        }
+
+        CheckListAysnc();
+    }
+
     IEnumerator CheckList()
     {
         yield return oneSecWait;
@@ -63,26 +90,19 @@ public class ColumnController : MonoBehaviour
                     if (nextGO.GetComponent<ObjectController>() != null)
                     {
                         objects[i - 1] = nextGO.transform;
-                        nextGO.transform.DOPunchScale(Vector3.one * 2, duration * 2, 1).OnComplete(OrganizeList);
+                        nextGO.transform.DOPunchScale(Vector3.one, duration * 2, 1);
                     }
                     else
                     {
-                        nextGO.transform.DOMove(_atmController.Target[_atmController.Index].position, 2f, false).OnComplete(OrganizeList);
-                        _atmController.Index++;
                         objects.Remove(objects[i - 1]);
-                    }
+                        nextGO.transform.DOMove(_atmController.Target[_atmController.Index].position, 1f, false);
+                        _atmController.Index++;
+                    }                   
+                    OrganizeList();
+                    _playerController.Dragging = true;
+                    yield break;
                 }
             }
         }
-        _playerController.Dragging = true;
-    }
-    IEnumerator MakeWave()
-    {
-        for (int i = 0; i <= objects.Count - 1; i++)
-        {
-            objects[i].DOPunchPosition(Vector3.up / 2, duration, 1, 1f, false);
-            yield return new WaitForSeconds(.05f);
-        }
-        StartCoroutine(CheckList());
     }
 }
