@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class PlayerController : MonoBehaviour
 {
@@ -8,13 +9,14 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] List<Transform> selectedObjects = new List<Transform>();
 
+    [SerializeField] private LayerMask _columnMask, _dragMask;
+
     private float _dist;
 
     private bool _dragging = true;
+    private bool _canPlay = true;
 
     private Transform _selected;
-
-    [SerializeField] private LayerMask _columnMask, _dragMask;
 
     public bool Dragging
     {
@@ -27,11 +29,23 @@ public class PlayerController : MonoBehaviour
             _dragging = value;
         }
     }
+    public bool CanPlay
+    {
+        get
+        {
+            return _canPlay;
+        }
+        set
+        {
+            _canPlay = value;
+        }
+    }
 
     RaycastHit hit;
-
     private void Update()
     {
+        if (!_canPlay) return;
+
         Vector3 v3;
 
         if (Input.touchCount != 1)
@@ -50,9 +64,9 @@ public class PlayerController : MonoBehaviour
             if (Physics.Raycast(ray, out hit, _dragMask))
             {
                 _selected = hit.transform;
-                
+
                 ObjectController objectController = _selected.GetComponent<ObjectController>();
-                if(objectController != null)
+                if (objectController != null)
                 {
                     _dist = hit.point.z - Camera.main.transform.position.z;
 
@@ -86,7 +100,7 @@ public class PlayerController : MonoBehaviour
             if (selectedObjects.Count == 0) return;
             ColumnController columnController = _selected.GetComponent<ObjectController>().WhichColumn.GetComponent<ColumnController>();
 
-            if (Physics.Raycast(selectedObjects[0].localPosition, selectedObjects[0].TransformDirection(Vector3.down),out hit, Mathf.Infinity, _columnMask))
+            if (Physics.Raycast(selectedObjects[0].localPosition, selectedObjects[0].TransformDirection(Vector3.down), out hit, Mathf.Infinity, _columnMask))
             {
                 if (hit.collider.GetComponent<ColumnController>() != null)
                 {
@@ -95,9 +109,6 @@ public class PlayerController : MonoBehaviour
                     {
                         _columnController.objects.Add(obj);
                         columnController.objects.Remove(obj);
-
-                        //_selected.position = new Vector3(_selected.position.x, .15f, _selected.position.z);
-
                     }
                     _columnController.OrganizeList();
                 }
@@ -144,3 +155,5 @@ public class PlayerController : MonoBehaviour
         }
     }
 }
+
+

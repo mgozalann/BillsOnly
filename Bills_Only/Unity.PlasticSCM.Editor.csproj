@@ -60,8 +60,8 @@
     <Compile Include="Library\PackageCache\com.unity.collab-proxy@1.15.1\Editor\PlasticSCM\Views\PendingChanges\Dialogs\EmptyCheckinMessageDialog.cs" />
     <Compile Include="Library\PackageCache\com.unity.collab-proxy@1.15.1\Editor\PlasticSCM\Configuration\CloudEdition\Welcome\AutoLogin.cs" />
     <Compile Include="Library\PackageCache\com.unity.collab-proxy@1.15.1\Editor\PlasticSCM\UI\Tree\TreeViewItemIds.cs" />
-    <Compile Include="Library\PackageCache\com.unity.collab-proxy@1.15.1\Editor\PlasticSCM\Views\IncomingChanges\Gluon\IncomingChangesTab.cs" />
     <Compile Include="Library\PackageCache\com.unity.collab-proxy@1.15.1\Editor\PlasticSCM\Developer\UpdateReport\UpdateReportDialog.cs" />
+    <Compile Include="Library\PackageCache\com.unity.collab-proxy@1.15.1\Editor\PlasticSCM\Views\IncomingChanges\Gluon\IncomingChangesTab.cs" />
     <Compile Include="Library\PackageCache\com.unity.collab-proxy@1.15.1\Editor\PlasticSCM\PlasticApp.cs" />
     <Compile Include="Library\PackageCache\com.unity.collab-proxy@1.15.1\Editor\PlasticSCM\UI\Avatar\ApplyCircleMask.cs" />
     <Compile Include="Library\PackageCache\com.unity.collab-proxy@1.15.1\Editor\PlasticSCM\GetRelativePath.cs" />

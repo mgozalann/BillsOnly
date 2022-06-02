@@ -7,19 +7,18 @@ public class ColumnController : MonoBehaviour
 {
     public List<Transform> objects = new List<Transform>();
 
-    private bool _crRunning = false;
-
     [SerializeField] Transform _spawnManager;
     [SerializeField] PlayerController _playerController;
     [SerializeField] AtmController _atmController;
 
-    WaitForSeconds oneSecWait = new WaitForSeconds(1f);
-    WaitForSeconds halfSecWait = new WaitForSeconds(.5f);
+    WaitForSeconds _longWait = new WaitForSeconds(.75f);
+    WaitForSeconds _shortWait = new WaitForSeconds(.05f);
 
-    [SerializeField] float duration;
+    [SerializeField] private float duration;
 
     public void OrganizeList()
     {
+        _playerController.CanPlay = false;
         if (objects.Count == 0) return;
 
         _playerController.Dragging = false;
@@ -57,25 +56,23 @@ public class ColumnController : MonoBehaviour
 
     IEnumerator MakeWave()
     {
-
         for (int i = 0; i <= objects.Count - 1; i++)
         {
             objects[i].DOPunchPosition(Vector3.up / 2, duration, 1, 1f, false);
-            yield return new WaitForSeconds(.05f);
+            yield return _shortWait;
         }
-
         CheckListAysnc();
     }
 
     IEnumerator CheckList()
     {
-        yield return oneSecWait;
         if (objects.Count > 1)
         {
             for (int i = objects.Count - 1; i >= 1; i--)
             {
                 if (objects[i].GetComponent<ObjectController>().ObjectSO.Value == objects[i - 1].GetComponent<ObjectController>().ObjectSO.Value)
                 {
+                    yield return _longWait;
                     objects[i - 1].gameObject.SetActive(false);
                     objects[i].gameObject.SetActive(false);
                     objects.Remove(objects[i]);
@@ -95,14 +92,15 @@ public class ColumnController : MonoBehaviour
                     else
                     {
                         objects.Remove(objects[i - 1]);
-                        nextGO.transform.DOMove(_atmController.Target[_atmController.Index].position, 1f, false);
+                        nextGO.transform.DOMove(_atmController.Target[_atmController.Index].position, 1.5f, false);
                         _atmController.Index++;
-                    }                   
+                    }
                     OrganizeList();
-                    _playerController.Dragging = true;
                     yield break;
                 }
             }
         }
+        _playerController.CanPlay = true;
+
     }
 }
