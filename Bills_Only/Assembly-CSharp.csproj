@@ -56,13 +56,15 @@
     <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\GameManager.cs" />
-    <Compile Include="Assets\Scripts\SpawnManager.cs" />
-    <Compile Include="Assets\Scripts\ObjectController.cs" />
-    <Compile Include="Assets\Scripts\PlayerController.cs" />
-    <Compile Include="Assets\Scripts\ObjectSO.cs" />
-    <Compile Include="Assets\Scripts\AtmController.cs" />
-    <Compile Include="Assets\Scripts\ColumnController.cs" />
+    <Compile Include="Assets\Scripts\Managers\GameManager.cs" />
+    <Compile Include="Assets\Scripts\Managers\SpawnManager.cs" />
+    <Compile Include="Assets\Scripts\Controllers\ObjectController.cs" />
+    <Compile Include="Assets\Scripts\Controllers\PlayerController.cs" />
+    <Compile Include="Assets\Scripts\ScriptableObjects\ObjectSO.cs" />
+    <Compile Include="Assets\Scripts\Controllers\AtmController.cs" />
+    <Compile Include="Assets\Scripts\Controllers\ColumnController.cs" />
+    <Compile Include="Assets\Scripts\DragObject.cs" />
+    <Compile Include="Assets\Scripts\SelectObject.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Low Poly ATM\Materials\vertexcolorsstandard.shader" />
