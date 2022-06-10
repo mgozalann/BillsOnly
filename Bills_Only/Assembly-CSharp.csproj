@@ -59,12 +59,12 @@
     <Compile Include="Assets\Scripts\Managers\GameManager.cs" />
     <Compile Include="Assets\Scripts\Managers\SpawnManager.cs" />
     <Compile Include="Assets\Scripts\Controllers\ObjectController.cs" />
+    <Compile Include="Assets\Scripts\SelectObject.cs" />
+    <Compile Include="Assets\Scripts\DragObject.cs" />
     <Compile Include="Assets\Scripts\Controllers\PlayerController.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\ObjectSO.cs" />
     <Compile Include="Assets\Scripts\Controllers\AtmController.cs" />
     <Compile Include="Assets\Scripts\Controllers\ColumnController.cs" />
-    <Compile Include="Assets\Scripts\DragObject.cs" />
-    <Compile Include="Assets\Scripts\SelectObject.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Low Poly ATM\Materials\vertexcolorsstandard.shader" />
