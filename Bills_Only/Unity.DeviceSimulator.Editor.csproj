@@ -59,30 +59,30 @@
     <Compile Include="Library\PackageCache\com.unity.device-simulator@3.0.3-preview\Editor\VisualElements\TwoPaneSplitView.cs" />
     <Compile Include="Library\PackageCache\com.unity.device-simulator@3.0.3-preview\Editor\Plugins\DeviceSimulatorExtensionWrapperPlugin.cs" />
     <Compile Include="Library\PackageCache\com.unity.device-simulator@3.0.3-preview\Editor\DeviceInfo\DeviceInfoImporterEditor.cs" />
-    <Compile Include="Library\PackageCache\com.unity.device-simulator@3.0.3-preview\Editor\Plugins\NotInitializePluginAttribute.cs" />
     <Compile Include="Library\PackageCache\com.unity.device-simulator@3.0.3-preview\Editor\Input\InputManagerBackend.cs" />
-    <Compile Include="Library\PackageCache\com.unity.device-simulator@3.0.3-preview\Editor\DeviceListPopup.cs" />
-    <Compile Include="Library\PackageCache\com.unity.device-simulator@3.0.3-preview\Editor\Input\InputSystemPlugin.cs" />
     <Compile Include="Library\PackageCache\com.unity.device-simulator@3.0.3-preview\Editor\DeviceSimulatorMain.cs" />
     <Compile Include="Library\PackageCache\com.unity.device-simulator@3.0.3-preview\Editor\Plugins\PluginController.cs" />
     <Compile Include="Library\PackageCache\com.unity.device-simulator@3.0.3-preview\Editor\settings\DeviceSimulatorProjectSettingsProvider.cs" />
-    <Compile Include="Library\PackageCache\com.unity.device-simulator@3.0.3-preview\Editor\UserInterfaceController.cs" />
     <Compile Include="Library\PackageCache\com.unity.device-simulator@3.0.3-preview\Editor\VisualElements\DeviceView.cs" />
-    <Compile Include="Library\PackageCache\com.unity.device-simulator@3.0.3-preview\Editor\Plugins\ApplicationPlugin.cs" />
     <Compile Include="Library\PackageCache\com.unity.device-simulator@3.0.3-preview\Editor\Input\TouchEventManipulator.cs" />
+    <Compile Include="Library\PackageCache\com.unity.device-simulator@3.0.3-preview\Editor\Plugins\DeviceSimulatorPlugin.cs" />
+    <Compile Include="Library\PackageCache\com.unity.device-simulator@3.0.3-preview\Editor\SimulatorWindow.cs" />
+    <Compile Include="Library\PackageCache\com.unity.device-simulator@3.0.3-preview\Editor\Shims\SystemInfoSimulation.cs" />
+    <Compile Include="Library\PackageCache\com.unity.device-simulator@3.0.3-preview\Editor\DeviceInfo\DeviceInfo.cs" />
+    <Compile Include="Library\PackageCache\com.unity.device-simulator@3.0.3-preview\Editor\Shims\ScreenSimulation.cs" />
+    <Compile Include="Library\PackageCache\com.unity.device-simulator@3.0.3-preview\Editor\Plugins\NotInitializePluginAttribute.cs" />
+    <Compile Include="Library\PackageCache\com.unity.device-simulator@3.0.3-preview\Editor\DeviceListPopup.cs" />
+    <Compile Include="Library\PackageCache\com.unity.device-simulator@3.0.3-preview\Editor\Input\InputSystemPlugin.cs" />
+    <Compile Include="Library\PackageCache\com.unity.device-simulator@3.0.3-preview\Editor\UserInterfaceController.cs" />
+    <Compile Include="Library\PackageCache\com.unity.device-simulator@3.0.3-preview\Editor\Plugins\ApplicationPlugin.cs" />
     <Compile Include="Library\PackageCache\com.unity.device-simulator@3.0.3-preview\Editor\Scripting\DeviceSimulatorInterfaces.cs" />
     <Compile Include="Library\PackageCache\com.unity.device-simulator@3.0.3-preview\Editor\SimulatorState.cs" />
     <Compile Include="Library\PackageCache\com.unity.device-simulator@3.0.3-preview\Editor\Plugins\DeviceSimulator.cs" />
-    <Compile Include="Library\PackageCache\com.unity.device-simulator@3.0.3-preview\Editor\Plugins\DeviceSimulatorPlugin.cs" />
     <Compile Include="Library\PackageCache\com.unity.device-simulator@3.0.3-preview\Editor\Shims\ApplicationSimulation.cs" />
     <Compile Include="Library\PackageCache\com.unity.device-simulator@3.0.3-preview\Editor\SimulatorUtilities.cs" />
-    <Compile Include="Library\PackageCache\com.unity.device-simulator@3.0.3-preview\Editor\SimulatorWindow.cs" />
     <Compile Include="Library\PackageCache\com.unity.device-simulator@3.0.3-preview\Editor\AssemblyInfo.cs" />
-    <Compile Include="Library\PackageCache\com.unity.device-simulator@3.0.3-preview\Editor\Shims\SystemInfoSimulation.cs" />
     <Compile Include="Library\PackageCache\com.unity.device-simulator@3.0.3-preview\Editor\DeviceInfo\DeviceInfoAsset.cs" />
-    <Compile Include="Library\PackageCache\com.unity.device-simulator@3.0.3-preview\Editor\DeviceInfo\DeviceInfo.cs" />
     <Compile Include="Library\PackageCache\com.unity.device-simulator@3.0.3-preview\Editor\Scripting\DeviceSimulatorCallbacks.cs" />
-    <Compile Include="Library\PackageCache\com.unity.device-simulator@3.0.3-preview\Editor\Shims\ScreenSimulation.cs" />
     <Compile Include="Library\PackageCache\com.unity.device-simulator@3.0.3-preview\Editor\DeviceInfo\DeviceInfoImporter.cs" />
     <Compile Include="Library\PackageCache\com.unity.device-simulator@3.0.3-preview\Editor\DeviceInfo\DeviceLoader.cs" />
     <Compile Include="Library\PackageCache\com.unity.device-simulator@3.0.3-preview\Editor\settings\DeviceSimulatorProjectSettings.cs" />
@@ -350,6 +350,9 @@
     </Reference>
     <Reference Include="DOTween">
       <HintPath>Assets\Plugins\Demigiant\DOTween\DOTween.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.NRefactory">
+      <HintPath>Library\PackageCache\com.unity.render-pipelines.core@10.7.0\Editor\ShaderGenerator\ICSharpCode.NRefactory.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@2.0.0\Runtime\Newtonsoft.Json.dll</HintPath>
