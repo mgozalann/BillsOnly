@@ -5,7 +5,7 @@ using DG.Tweening;
 
 public class InputController : SingletonMonoBehaviorObject<InputController>
 {
-    private List<Transform> selectedObjects = new List<Transform>();
+    private List<Transform> _selectedObjects = new List<Transform>();
 
     [SerializeField] private LayerMask _columnMask, _dragMask, _landMask;
 
@@ -46,9 +46,10 @@ public class InputController : SingletonMonoBehaviorObject<InputController>
     private void Awake()
     {
         SingletonThisObject(this);
-        _dragObject = gameObject.AddComponent<DragObject>();
 
+        _dragObject = gameObject.AddComponent<DragObject>();
         _selectObject = gameObject.AddComponent<SelectObject>();
+
     }
     private void Update()
     {
@@ -81,7 +82,7 @@ public class InputController : SingletonMonoBehaviorObject<InputController>
                     v3 = new Vector3(pos.x, pos.y, _dist);
                     v3 = Camera.main.ScreenToWorldPoint(v3);
 
-                    _selectObject.Tick(hit.collider.gameObject, selectedObjects);
+                    _selectObject.Tick(hit.collider.gameObject, _selectedObjects);
 
                     _dragging = true;
                 }
@@ -91,29 +92,29 @@ public class InputController : SingletonMonoBehaviorObject<InputController>
 
         if (_dragging && touch.phase == TouchPhase.Moved)
         {
-            if (selectedObjects.Count != 0)
+            if (_selectedObjects.Count != 0)
             {
-                v3 = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.WorldToScreenPoint(selectedObjects[0].position).z);
+                v3 = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.WorldToScreenPoint(_selectedObjects[0].position).z);
                 v3 = Camera.main.ScreenToWorldPoint(v3);
 
-                selectedObjects[0].position = new Vector3(v3.x, 1.75f, v3.z);
+                _selectedObjects[0].position = new Vector3(v3.x, 1.75f, v3.z);
 
-                _dragObject.Tick(selectedObjects,-1.2f);
+                _dragObject.Tick(_selectedObjects,-1.2f);
             }
 
         }
 
         if (_dragging && (touch.phase == TouchPhase.Ended || touch.phase == TouchPhase.Canceled))
         {
-            if (selectedObjects.Count == 0) return;
+            if (_selectedObjects.Count == 0) return;
             ColumnController columnController = _selected.GetComponent<ObjectController>().WhichColumn.GetComponent<ColumnController>();
 
-            if (Physics.Raycast(selectedObjects[0].localPosition, selectedObjects[0].TransformDirection(Vector3.down), out hit, Mathf.Infinity, _columnMask))
+            if (Physics.Raycast(_selectedObjects[0].localPosition, _selectedObjects[0].TransformDirection(Vector3.down), out hit, Mathf.Infinity, _columnMask))
             {
                 if (hit.collider.GetComponent<ColumnController>() != null)
                 {
                     ColumnController _columnController = hit.collider.GetComponent<ColumnController>();
-                    foreach (var obj in selectedObjects)
+                    foreach (var obj in _selectedObjects)
                     {
                         _columnController.objects.Add(obj);
                         columnController.objects.Remove(obj);
@@ -129,7 +130,7 @@ public class InputController : SingletonMonoBehaviorObject<InputController>
                 }
             }
 
-            selectedObjects.Clear();
+            _selectedObjects.Clear();
             _selected = null;
             _dragging = false;
 

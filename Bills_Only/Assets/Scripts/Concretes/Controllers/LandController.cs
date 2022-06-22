@@ -7,16 +7,16 @@ public class LandController : MonoBehaviour
 {
     [SerializeField] private LandSO _landSO;
     [SerializeField] private Text _text;
-
+    [SerializeField] private Transform[] _lands;
     private enum State
     {
         buyable,
         unbuyable,
+        bought,
     }
 
-    private State _curState;
+    [SerializeField] private State _curState;
     
-
     private void Start()
     {
         if (!PlayerPrefs.HasKey("Index"))
@@ -27,36 +27,68 @@ public class LandController : MonoBehaviour
         {
             PlayerPrefs.SetInt("Money", 0);
         }
+
+
     }
     private void Update()
     {
+        StateMachine();
         StateCheck();
+
+        Debug.Log(PlayerPrefs.GetInt("Index"));
     }
     public void BuyLand()
     {
-        if (_curState == State.unbuyable) return;
-        if (PlayerPrefs.GetInt("Money") >= _landSO.Price)
+        if(_curState == State.buyable)
         {
-            Debug.Log(this.gameObject.name);
-            PlayerPrefs.SetInt("Money", PlayerPrefs.GetInt("Money") - _landSO.Price); // para eksilt
-            PlayerPrefs.SetInt("Index", PlayerPrefs.GetInt("Index") + 1); // index++
+            if (PlayerPrefs.GetInt("Money") >= _landSO.Price)
+            {
+                PlayerPrefs.SetInt("Money", PlayerPrefs.GetInt("Money") - _landSO.Price); // para eksilt
+                PlayerPrefs.SetInt("Index", PlayerPrefs.GetInt("Index") + 1); // index++
+
+                _curState = State.bought;
+            }
         }
-    }
+    }   
+
+   
     private void StateCheck()
     {
+        if(_landSO.Rank < PlayerPrefs.GetInt("Index"))
+        {
+            _curState = State.bought;
+        }
+        if (_curState == State.bought) return;
+
         if (_landSO.Rank == PlayerPrefs.GetInt("Index"))
         {
             _curState = State.buyable;
-            //yanýp sönsün
-            // _text.text = PlayerPrefs.GetInt("Money").ToString() + "/" + _landSO.Price.ToString();
-
         }
-        else
+        else if(_landSO.Rank != PlayerPrefs.GetInt("Index"))
         {
             _curState = State.unbuyable;
-            //hiçbir þey yapmasýn
         }
     }
 
+    private void StateMachine()
+    {
+        if(_curState == State.buyable)
+        {
+            SetLands(true);
+        }
+        else if(_curState == State.unbuyable)
+        {
+            SetLands(true);
+        }
+        else
+        {
+            SetLands(false);
+        }
+    }
+    private void SetLands(bool open)
+    {
+        _lands[0].transform.gameObject.SetActive(open);
+        _lands[1].transform.gameObject.SetActive(!open);
+    }
 }
 

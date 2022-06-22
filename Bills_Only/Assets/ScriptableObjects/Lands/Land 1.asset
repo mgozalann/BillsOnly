@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Land 1
   m_EditorClassIdentifier: 
   _rank: 1
-  _price: 4
+  _price: 0
+  _boughtPrefab: {fileID: 5675974115692517351, guid: 5c079e86e269e5a4cbb9c1313f6ab9ac, type: 3}

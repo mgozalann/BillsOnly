@@ -6,9 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class LevelManager : SingletonMonoBehaviorObject<LevelManager>
 {
-    [SerializeField] LevelDataSO _levelDataSO;
-    [SerializeField] GameObject[] _objectsPrefab;
-
+    [SerializeField] private LevelDataSO _levelDataSO;
+    [SerializeField] private GameObject[] _objectsPrefab;
 
     public GameObject[] ObjectsPrefab => _objectsPrefab;
     public LevelDataSO LevelDataSO => _levelDataSO;

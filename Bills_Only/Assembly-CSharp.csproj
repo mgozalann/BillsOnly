@@ -58,13 +58,13 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Concretes\Managers\GameManager.cs" />
     <Compile Include="Assets\Scripts\Concretes\Controllers\ObjectController.cs" />
-    <Compile Include="Assets\Scripts\Concretes\DragObject.cs" />
+    <Compile Include="Assets\Scripts\Concretes\ObjectMovement\DragObject.cs" />
     <Compile Include="Assets\Scripts\Concretes\Controllers\GainController.cs" />
     <Compile Include="Assets\Scripts\Concretes\Managers\SpawnManager.cs" />
     <Compile Include="Assets\Scripts\Concretes\Controllers\LandController.cs" />
     <Compile Include="Assets\Scripts\Concretes\ScriptableObjects\LevelDataSO.cs" />
     <Compile Include="Assets\Scripts\Abstracts\SingletonMonoBehaviorObject.cs" />
-    <Compile Include="Assets\Scripts\Concretes\SelectObject.cs" />
+    <Compile Include="Assets\Scripts\Concretes\ObjectMovement\SelectObject.cs" />
     <Compile Include="Assets\Scripts\Concretes\ScriptableObjects\LandSO.cs" />
     <Compile Include="Assets\Scripts\Concretes\Managers\LevelManager.cs" />
     <Compile Include="Assets\Scripts\Concretes\Controllers\InputController.cs" />

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Land 3
   m_EditorClassIdentifier: 
   _rank: 3
-  _price: 25
+  _price: 0
