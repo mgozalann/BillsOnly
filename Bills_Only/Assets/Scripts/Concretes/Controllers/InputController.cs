@@ -11,7 +11,7 @@ public class InputController : SingletonMonoBehaviorObject<InputController>
 
     private float _dist;
     private bool _dragging = true;
-    private bool _canPlay = true;
+    private bool _canPlay = false;
 
     private Transform _selected;
 
@@ -53,6 +53,7 @@ public class InputController : SingletonMonoBehaviorObject<InputController>
     }
     private void Update()
     {
+
         if (!_canPlay) return;
 
         Vector3 v3;

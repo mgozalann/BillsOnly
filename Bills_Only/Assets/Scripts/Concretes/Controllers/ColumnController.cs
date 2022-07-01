@@ -89,6 +89,7 @@ public class ColumnController : MonoBehaviour
                     else
                     {
                         objects.Remove(objects[i - 1]);
+                        nextGO.transform.DOPunchScale(Vector3.one, duration * 2, 1);
                         nextGO.transform.DOMove(_gainController.Target[_gainController.Index].position, 1.5f, false).OnComplete(_gainController.CheckIndex);
                     }
                     OrganizeList();
@@ -98,5 +99,5 @@ public class ColumnController : MonoBehaviour
         }
         _playerController.CanPlay = true;
     }
-   
+
 }

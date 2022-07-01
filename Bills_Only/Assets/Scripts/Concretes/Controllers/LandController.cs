@@ -34,8 +34,6 @@ public class LandController : MonoBehaviour
     {
         StateMachine();
         StateCheck();
-
-        Debug.Log(PlayerPrefs.GetInt("Index"));
     }
     public void BuyLand()
     {

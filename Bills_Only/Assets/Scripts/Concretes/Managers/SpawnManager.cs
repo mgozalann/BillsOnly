@@ -57,6 +57,12 @@ public class SpawnManager : MonoBehaviour
                 var firstSwap = _objectList[i + 1];
                 _objectList[i + 1] = _objectList[i + 2];
                 _objectList[i + 2] = firstSwap;
+
+                if(_objectList[i+1] == _objectList[i+2])
+                {
+                    _objectList = _objectList.OrderBy(p => Guid.NewGuid()).ToList();
+                    CheckListElements();
+                }
             }
         }
     }
